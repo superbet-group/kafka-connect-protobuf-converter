@@ -22,14 +22,16 @@ public class ProtobufHeaderConverter implements HeaderConverter {
   private static final String PROTO_CLASS_NAME_CONFIG = "protoClassName";
   private static final String LEGACY_NAME_CONFIG = "legacyName";
   private static final String PROTO_MAP_CONVERSION_TYPE = "protoMapConversionType";
-  private static final ConfigDef CONFIG_DEF = new ConfigDef();
+
+  private static final ConfigDef CONFIG_DEF = new ConfigDef()
+    .define(PROTO_CLASS_NAME_CONFIG, Type.STRING, Importance.HIGH, "Name of the class that will be used to do the conversion")
+    .define(LEGACY_NAME_CONFIG, Type.STRING, "legacy_name", Importance.LOW, "In order to support these output formats, we use a custom field option to specify the original name and keep the Kafka Connect schema consistent")
+    .define(PROTO_MAP_CONVERSION_TYPE, Type.STRING, "array", Importance.LOW, "Whether to convert the Protobuf map type to an Array of Struct or into Connect Schema Map type");
+
   private ProtobufData protobufData;
 
   @Override
   public ConfigDef config() {
-    CONFIG_DEF.define(PROTO_CLASS_NAME_CONFIG, Type.STRING, Importance.HIGH, "Name of the class that will be used to do the conversion");
-    CONFIG_DEF.define(LEGACY_NAME_CONFIG, Type.STRING, "legacy_name", Importance.LOW, "In order to support these output formats, we use a custom field option to specify the original name and keep the Kafka Connect schema consistent");
-    CONFIG_DEF.define(PROTO_MAP_CONVERSION_TYPE, Type.STRING, "array", Importance.LOW, "Whether to convert the Protobuf map type to an Array of Struct or into Connect Schema Map type");
     return CONFIG_DEF;
   }
 
