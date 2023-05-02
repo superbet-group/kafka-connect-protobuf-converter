@@ -1,0 +1,17 @@
+{
+  "repositoryUrl": "https://github.com/superbet-group/kafka-connect-protobuf-converter",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "target/*.jar"
+          }
+        ]
+      }
+    ]
+  ]
+}
