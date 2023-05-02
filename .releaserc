@@ -8,9 +8,15 @@
       {
         "assets": [
           {
-            "path": "target/*.jar"
+            "path": "target/*with-dependencies.jar"
           }
         ]
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "mv target/kafka-connect-protobuf-converter-v0.0.0-jar-with-dependencies.jar target/kafka-connect-protobuf-converter-${nextRelease.version}-jar-with-dependencies.jar"
       }
     ]
   ]
